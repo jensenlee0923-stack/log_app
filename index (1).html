@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logarithms Across HKDSE Subjects</title>
+    <style>
+        :root {
+            --bg: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-light: #6b7280;
+            
+            /* Subject Colors */
+            --c-phy: #2563eb;  /* Blue */
+            --c-chem: #dc2626; /* Red */
+            --c-bio: #16a34a;  /* Green */
+            --c-geo: #d97706;  /* Amber */
+            --c-bafs: #7c3aed; /* Violet */
+            --c-ict: #db2777;  /* Pink */
+            --c-music: #0891b2; /* Cyan */
+            --c-astro: #475569; /* Slate */
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 30px;
+        }
+
+        h1 { margin: 0; font-size: 2.5rem; color: #111827; }
+        .subtitle { color: #6b7280; font-size: 1.1rem; margin-top: 10px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-top: 6px solid #ccc;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Border Colors */
+        .card.phy { border-color: var(--c-phy); }
+        .card.chem { border-color: var(--c-chem); }
+        .card.bio { border-color: var(--c-bio); }
+        .card.geo { border-color: var(--c-geo); }
+        .card.bafs { border-color: var(--c-bafs); }
+        .card.ict { border-color: var(--c-ict); }
+        .card.music { border-color: var(--c-music); }
+        .card.astro { border-color: var(--c-astro); }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .icon { font-size: 1.8rem; margin-right: 12px; }
+        h2 { margin: 0; font-size: 1.25rem; }
+        
+        .badge {
+            margin-left: auto;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: white;
+            background: #9ca3af;
+        }
+
+        /* Educational Context Box */
+        .context-box {
+            background: #f9fafb;
+            border-left: 4px solid #e5e7eb;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+        .context-title {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 4px;
+            color: #374151;
+        }
+
+        /* Calculator Styles */
+        .calc-section {
+            margin-top: auto; /* Pushes to bottom */
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .formula {
+            font-family: monospace;
+            background: #eff6ff;
+            color: #1e40af;
+            padding: 5px;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+
+        .input-row { display: flex; gap: 10px; margin-bottom: 10px; }
+        .input-group { flex: 1; }
+        
+        label { display: block; font-size: 0.75rem; font-weight: 700; color: #6b7280; margin-bottom: 2px; }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        button:hover { opacity: 0.9; }
+
+        /* Button Colors */
+        .phy button { background: var(--c-phy); }
+        .chem button { background: var(--c-chem); }
+        .geo button { background: var(--c-geo); }
+        .bio button { background: var(--c-bio); }
+        .bafs button { background: var(--c-bafs); }
+        .ict button { background: var(--c-ict); }
+        .music button { background: var(--c-music); }
+        .astro button { background: var(--c-astro); }
+
+        .result {
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            min-height: 1.5em;
+            color: #111827;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Logarithms in Different Fields</h1>
+    </header>
+
+    <div class="grid">
+
+        <div class="card phy">
+            <div class="card-header">
+                <span class="icon">🔊</span>
+                <h2>Sound Intensity</h2>
+                <span class="badge" style="background:var(--c-phy)">Physics</span>
+            </div>
+            <div class="context-box">
+                <span class="context-title">Why do we use logs here?</span>
+                Our ears are incredibly sensitive. We can hear a mosquito (very quiet) and a jet engine (trillions of times more powerful). If we used a linear scale (1, 2, 3...), the numbers for loud sounds would be too huge to write down. Logs shrink this massive range into 0–140 dB.
+            </div>
+            <div class="calc-section">
+                <div class="formula">dB = 10 · log₁₀(Intensity / Threshold)</div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Sound Intensity (W/m²)</label>
+                        <input type="number" id="phy-i" value="0.001" step="any">
+                    </div>
+                </div>
+                <button onclick="calcPhy()">Calculate Decibels</button>
+                <div id="res-phy" class="result"></div>
+            </div>
+        </div>
+
+        <div class="card chem">
+            <div class="card-header">
+                <span class="icon">🧪</span>
+                <h2>Acidity (pH)</h2>
+                <span class="badge" style="background:var(--c-chem)">Chemistry</span>
+            </div>
+            <div class="context-box">
+                <span class="context-title">What does pH actually mean?</span>
+                It counts Hydrogen ions ($H^+$). In pure water, the concentration is $0.0000001$ mol/L. Writing all those zeros is annoying! So we take the log ($log_{10} = -7$) and flip the sign to get **pH 7**. A change of 1 pH unit means the acidity changes by **10 times**.
+            </div>
+            <div class="calc-section">
+                <div class="formula">pH = -log₁₀[H⁺]</div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Concentration (mol/L)</label>
+                        <input type="number" id="chem-h" value="0.00001" step="any">
+                    </div>
+                </div>
+                <button onclick="calcChem()">Calculate pH</button>
+                <div id="res-chem" class="result"></div>
+            </div>
+        </div>
+
+        <div class="card geo">
+            <div class="card-header">
+                <span class="icon">🌋</span>
+                <h2>Earthquake Energy</h2>
+                <span class="badge" style="background:var(--c-geo)">Geography</span>
+            </div>
+            <div class="context-box">
+                <span class="context-title">The "Richter" Deception</span>
+                People think a Magnitude 8 is "double" a Magnitude 4. It's not. The scale is logarithmic base-32 for energy. A Mag 8 quake releases **1,000,000 times** more energy than a Mag 4. This is why high-magnitude quakes are so rare but catastrophic.
+            </div>
+            <div class="calc-section">
+                <div class="formula">Energy = 10^(4.8 + 1.5M)</div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Richter Magnitude</label>
+                        <input type="number" id="geo-m" value="6.0" step="0.1">
+                    </div>
+                </div>
+                <button onclick="calcGeo()">Calculate Joules</button>
+                <div id="res-geo" class="result"></div>
+            </div>
+        </div>
+
+        <div class="card bio">
+            <div class="card-header">
+                <span class="icon">🧫</span>
+                <h2>Bacterial Growth</h2>
+                <span class="badge" style="background:var(--c-bio)">Biology</span>
+            </div>
+            <div class="context-box">
+                <span class="context-title">The Exponential Explosion</span>
+                Bacteria divide: 1 becomes 2, 2 become 4, 4 become 8. This is "Exponential Growth". If we plot this on normal paper, the line shoots off the page instantly. Biologists use "Log Graphs" to turn this curve into a straight line, making it easier to predict outbreaks.
+            </div>
+            <div class="calc-section">
+                <div class="formula">Generations = log₂(Final / Start)</div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Start Count</label>
+                        <input type="number" id="bio-s" value="100">
+                    </div>
+                    <div class="input-group">
+                        <label>Final Count</label>
+                        <input type="number" id="bio-e" value="100000">
+                    </div>
+                </div>
+                <button onclick="calcBio()">Calculate Generations</button>
+                <div id="res-bio" class="result"></div>
+            </div>
+        </div>
+
+        <div class="card bafs">
+            <div class="card-header">
+                <span class="icon">💰</span>
+                <h2>Compound Interest</h2>
+                <span class="badge" style="background:var(--c-bafs)">BAFS / Econ</span>
+            </div>
+            <div class="context-box">
+                <span class="context-title">Solving for Time</span>
+                If you invest money, it grows exponentially (snowball effect). If you want to know *how much* money you'll have, you use exponents. But if you want to know *how long* (time) it takes to become a millionaire, you must use **Logarithms** to reverse the exponent.
+            </div>
+            <div class="calc-section">
+                <div class="formula">Time = log(Target/Principal) ÷ log(1+r)</div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Principal ($)</label>
+                        <input type="number" id="bafs-p" value="10000">
+                    </div>
+                    <div class="input-group">
+                        <label>Target ($)</label>
+                        <input type="number" id="bafs-a" value="20000">
+                    </div>
+                </div>
+                <div class="input-row">
+                     <div class="input-group">
+                        <label>Interest Rate (%)</label>
+                        <input type="number" id="bafs-r" value="5">
+                    </div>
+                </div>
+                <button onclick="calcBafs()">Calculate Years</button>
+                <div id="res-bafs" class="result"></div>
+            </div>
+        </div>
+
+        <div class="card ict">
+            <div class="card-header">
+                <span class="icon">💾</span>
+                <h2>Binary Search</h2>
+                <span class="badge" style="background:var(--c-ict)">ICT</span>
+            </div>
+            <div class="context-box">
+                <span class="context-title">Divide and Conquer</span>
+                Imagine a phone book with 1,000,000 names. You don't read every name. You open the middle, see if the name is left or right, and repeat. You cut the problem in half every time. Logarithms (base 2) tell programmers exactly how many "cuts" are needed.
+            </div>
+            <div class="calc-section">
+                <div class="formula">Max Steps = log₂(Items)</div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Database Size (Rows)</label>
+                        <input type="number" id="ict-n" value="1000000">
+                    </div>
+                </div>
+                <button onclick="calcIct()">Calculate Steps</button>
+                <div id="res-ict" class="result"></div>
+            </div>
+        </div>
+
+        <div class="card music">
+            <div class="card-header">
+                <span class="icon">🎹</span>
+                <h2>Music & Pitch</h2>
+                <span class="badge" style="background:var(--c-music)">Music / Physics</span>
+            </div>
+            <div class="context-box">
+                <span class="context-title">Logarithmic Ears</span>
+                Our ears perceive pitch logarithmically. The note "A3" is 220Hz. "A4" is 440Hz. "A5" is 880Hz. Every time the frequency **doubles**, we hear the "same" note, just higher. This equal spacing of octaves is a base-2 logarithmic scale.
+            </div>
+            <div class="calc-section">
+                <div class="formula">Octaves = log₂(Freq2 / Freq1)</div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Low Note (Hz)</label>
+                        <input type="number" id="music-f1" value="220">
+                    </div>
+                    <div class="input-group">
+                        <label>High Note (Hz)</label>
+                        <input type="number" id="music-f2" value="880">
+                    </div>
+                </div>
+                <button onclick="calcMusic()">Calculate Octaves</button>
+                <div id="res-music" class="result"></div>
+            </div>
+        </div>
+
+        <div class="card astro">
+            <div class="card-header">
+                <span class="icon">⭐</span>
+                <h2>Stellar Magnitude</h2>
+                <span class="badge" style="background:var(--c-astro)">Astronomy</span>
+            </div>
+            <div class="context-box">
+                <span class="context-title">The Backward Scale</span>
+                Ancient astronomers ranked stars: 1st class (brightest) to 6th class (dimmest). Modern science kept this but made it math. It's an **inverse log scale**: Lower numbers are brighter. A difference of 5 magnitudes = exactly 100x brightness difference.
+            </div>
+            <div class="calc-section">
+                <div class="formula">Mag Diff = -2.5 · log₁₀(Bright1 / Bright2)</div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Brightness Ratio</label>
+                        <input type="number" id="astro-r" value="100">
+                    </div>
+                </div>
+                <button onclick="calcAstro()">Calculate Mag Diff</button>
+                <div id="res-astro" class="result"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Physics
+        function calcPhy() {
+            const I = parseFloat(document.getElementById('phy-i').value);
+            const res = 10 * Math.log10(I/1e-12);
+            document.getElementById('res-phy').innerText = res.toFixed(2) + " dB";
+        }
+        // Chemistry
+        function calcChem() {
+            const h = parseFloat(document.getElementById('chem-h').value);
+            const res = -Math.log10(h);
+            document.getElementById('res-chem').innerText = "pH " + res.toFixed(2);
+        }
+        // Geo
+        function calcGeo() {
+            const m = parseFloat(document.getElementById('geo-m').value);
+            const e = Math.pow(10, 4.8 + 1.5*m);
+            document.getElementById('res-geo').innerText = e.toExponential(2) + " Joules";
+        }
+        // Bio
+        function calcBio() {
+            const s = parseFloat(document.getElementById('bio-s').value);
+            const e = parseFloat(document.getElementById('bio-e').value);
+            const res = Math.log2(e/s);
+            document.getElementById('res-bio').innerText = res.toFixed(1) + " Gens";
+        }
+        // BAFS
+        function calcBafs() {
+            const p = parseFloat(document.getElementById('bafs-p').value);
+            const a = parseFloat(document.getElementById('bafs-a').value);
+            const r = parseFloat(document.getElementById('bafs-r').value)/100;
+            const res = Math.log(a/p) / Math.log(1+r);
+            document.getElementById('res-bafs').innerText = res.toFixed(1) + " Years";
+        }
+        // ICT
+        function calcIct() {
+            const n = parseFloat(document.getElementById('ict-n').value);
+            const res = Math.log2(n);
+            document.getElementById('res-ict').innerText = Math.ceil(res) + " Steps (Max)";
+        }
+        // Music
+        function calcMusic() {
+            const f1 = parseFloat(document.getElementById('music-f1').value);
+            const f2 = parseFloat(document.getElementById('music-f2').value);
+            const res = Math.log2(f2/f1);
+            document.getElementById('res-music').innerText = res.toFixed(2) + " Octaves";
+        }
+        // Astro
+        function calcAstro() {
+            const r = parseFloat(document.getElementById('astro-r').value);
+            const res = -2.5 * Math.log10(r);
+            document.getElementById('res-astro').innerText = Math.abs(res).toFixed(2) + " Magnitude";
+        }
+    </script>
+</body>
+</html>
