@@ -9,7 +9,6 @@
             --bg: #f3f4f6;
             --card-bg: #ffffff;
             --text-main: #1f2937;
-            --text-light: #6b7280;
             
             /* Subject Colors */
             --c-phy: #2563eb;  /* Blue */
@@ -20,6 +19,7 @@
             --c-ict: #db2777;  /* Pink */
             --c-music: #0891b2; /* Cyan */
             --c-astro: #475569; /* Slate */
+            --c-arch: #854d0e; /* Brown */
         }
 
         body {
@@ -28,16 +28,16 @@
             color: var(--text-main);
             margin: 0;
             padding: 20px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         header {
             text-align: center;
             padding: 40px 0;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
-        h1 { margin: 0; font-size: 2.5rem; color: #111827; }
+        h1 { margin: 0; font-size: 2.5rem; color: #111827; letter-spacing: -1px; }
         .subtitle { color: #6b7280; font-size: 1.1rem; margin-top: 10px; }
 
         .grid {
@@ -56,9 +56,12 @@
             border-top: 6px solid #ccc;
             display: flex;
             flex-direction: column;
+            transition: transform 0.2s;
         }
 
-        /* Border Colors */
+        .card:hover { transform: translateY(-3px); }
+
+        /* Subject Specific Border Colors */
         .card.phy { border-color: var(--c-phy); }
         .card.chem { border-color: var(--c-chem); }
         .card.bio { border-color: var(--c-bio); }
@@ -67,71 +70,79 @@
         .card.ict { border-color: var(--c-ict); }
         .card.music { border-color: var(--c-music); }
         .card.astro { border-color: var(--c-astro); }
+        .card.arch { border-color: var(--c-arch); }
 
         .card-header {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f3f4f6;
         }
 
         .icon { font-size: 1.8rem; margin-right: 12px; }
-        h2 { margin: 0; font-size: 1.25rem; }
+        h2 { margin: 0; font-size: 1.25rem; font-weight: 700; }
         
         .badge {
             margin-left: auto;
             font-size: 0.7rem;
             text-transform: uppercase;
-            font-weight: bold;
-            padding: 3px 8px;
+            font-weight: 800;
+            padding: 4px 8px;
             border-radius: 4px;
             color: white;
-            background: #9ca3af;
+            letter-spacing: 0.5px;
         }
 
-        /* Educational Context Box */
         .context-box {
             background: #f9fafb;
-            border-left: 4px solid #e5e7eb;
             padding: 12px;
+            border-radius: 6px;
             margin-bottom: 20px;
             font-size: 0.9rem;
             color: #4b5563;
         }
+
         .context-title {
-            font-weight: bold;
+            font-weight: 700;
             display: block;
             margin-bottom: 4px;
             color: #374151;
         }
 
-        /* Calculator Styles */
-        .calc-section {
-            margin-top: auto; /* Pushes to bottom */
-            padding-top: 15px;
-            border-top: 1px solid #e5e7eb;
+        /* Formula Styling */
+        .formula-container {
+            background: #eff6ff;
+            color: #1e3a8a;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            margin-bottom: 15px;
+            border: 1px solid #dbeafe;
         }
 
         .formula {
-            font-family: monospace;
-            background: #eff6ff;
-            color: #1e40af;
-            padding: 5px;
-            border-radius: 4px;
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 0.85rem;
+            font-family: "Cambria Math", "Times New Roman", serif;
+            font-size: 1.1rem;
+            font-style: italic;
         }
+        
+        /* Non-italic for numbers/functions in formula */
+        .formula span { font-style: normal; }
+
+        .calc-section { margin-top: auto; }
 
         .input-row { display: flex; gap: 10px; margin-bottom: 10px; }
         .input-group { flex: 1; }
         
-        label { display: block; font-size: 0.75rem; font-weight: 700; color: #6b7280; margin-bottom: 2px; }
+        label { display: block; font-size: 0.75rem; font-weight: 700; color: #6b7280; margin-bottom: 4px; }
         input {
             width: 100%;
-            padding: 8px;
+            padding: 8px 12px;
             border: 1px solid #d1d5db;
             border-radius: 6px;
             box-sizing: border-box;
+            font-family: inherit;
         }
 
         button {
@@ -143,10 +154,11 @@
             font-weight: 600;
             cursor: pointer;
             transition: opacity 0.2s;
+            margin-top: 5px;
         }
         button:hover { opacity: 0.9; }
 
-        /* Button Colors */
+        /* Dynamic Button Colors */
         .phy button { background: var(--c-phy); }
         .chem button { background: var(--c-chem); }
         .geo button { background: var(--c-geo); }
@@ -155,21 +167,31 @@
         .ict button { background: var(--c-ict); }
         .music button { background: var(--c-music); }
         .astro button { background: var(--c-astro); }
+        .arch button { background: var(--c-arch); }
 
         .result {
-            margin-top: 10px;
+            margin-top: 15px;
             text-align: center;
-            font-weight: bold;
-            font-size: 1.1rem;
+            font-weight: 800;
+            font-size: 1.2rem;
             min-height: 1.5em;
             color: #111827;
+            padding: 10px;
+            background: #f3f4f6;
+            border-radius: 6px;
+            opacity: 0; /* Hidden initially */
+            transition: opacity 0.3s ease-in;
         }
+        
+        .result.show { opacity: 1; }
+
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Logarithms in Different Fields</h1>
+        <h1>Logarithms in Real Life</h1>
+        <p class="subtitle">Interactive Dashboard for HKDSE Curriculum</p>
     </header>
 
     <div class="grid">
@@ -181,14 +203,16 @@
                 <span class="badge" style="background:var(--c-phy)">Physics</span>
             </div>
             <div class="context-box">
-                <span class="context-title">Why do we use logs here?</span>
-                Our ears are incredibly sensitive. We can hear a mosquito (very quiet) and a jet engine (trillions of times more powerful). If we used a linear scale (1, 2, 3...), the numbers for loud sounds would be too huge to write down. Logs shrink this massive range into 0–140 dB.
+                <span class="context-title">Why Logarithms?</span>
+                Sound intensity varies enormously. A linear scale would require writing "1,000,000,000,000" for a loud noise. Decibels (dB) shrink this range.
             </div>
             <div class="calc-section">
-                <div class="formula">dB = 10 · log₁₀(Intensity / Threshold)</div>
+                <div class="formula-container">
+                    <div class="formula">L = 10 <span>log</span><sub>10</sub>( I / I<sub>0</sub> )</div>
+                </div>
                 <div class="input-row">
                     <div class="input-group">
-                        <label>Sound Intensity (W/m²)</label>
+                        <label>Intensity (W/m²)</label>
                         <input type="number" id="phy-i" value="0.001" step="any">
                     </div>
                 </div>
@@ -204,11 +228,13 @@
                 <span class="badge" style="background:var(--c-chem)">Chemistry</span>
             </div>
             <div class="context-box">
-                <span class="context-title">What does pH actually mean?</span>
-                It counts Hydrogen ions ($H^+$). In pure water, the concentration is $0.0000001$ mol/L. Writing all those zeros is annoying! So we take the log ($log_{10} = -7$) and flip the sign to get **pH 7**. A change of 1 pH unit means the acidity changes by **10 times**.
+                <span class="context-title">Understanding pH</span>
+                Concentrations of H<sup>+</sup> ions are tiny decimals (e.g., 0.00001). The log scale turns these into simple integers (pH 1-14).
             </div>
             <div class="calc-section">
-                <div class="formula">pH = -log₁₀[H⁺]</div>
+                <div class="formula-container">
+                    <div class="formula">pH = -<span>log</span><sub>10</sub>[H<sup>+</sup>]</div>
+                </div>
                 <div class="input-row">
                     <div class="input-group">
                         <label>Concentration (mol/L)</label>
@@ -227,18 +253,20 @@
                 <span class="badge" style="background:var(--c-geo)">Geography</span>
             </div>
             <div class="context-box">
-                <span class="context-title">The "Richter" Deception</span>
-                People think a Magnitude 8 is "double" a Magnitude 4. It's not. The scale is logarithmic base-32 for energy. A Mag 8 quake releases **1,000,000 times** more energy than a Mag 4. This is why high-magnitude quakes are so rare but catastrophic.
+                <span class="context-title">The Power of Magnitude</span>
+                A Magnitude 8 is not "double" a Magnitude 4. The energy scale is base-32. Huge quakes are millions of times stronger than small ones.
             </div>
             <div class="calc-section">
-                <div class="formula">Energy = 10^(4.8 + 1.5M)</div>
+                <div class="formula-container">
+                    <div class="formula">E = 10<sup>(4.8 + 1.5M)</sup></div>
+                </div>
                 <div class="input-row">
                     <div class="input-group">
                         <label>Richter Magnitude</label>
                         <input type="number" id="geo-m" value="6.0" step="0.1">
                     </div>
                 </div>
-                <button onclick="calcGeo()">Calculate Joules</button>
+                <button onclick="calcGeo()">Calculate Energy (Joules)</button>
                 <div id="res-geo" class="result"></div>
             </div>
         </div>
@@ -250,11 +278,13 @@
                 <span class="badge" style="background:var(--c-bio)">Biology</span>
             </div>
             <div class="context-box">
-                <span class="context-title">The Exponential Explosion</span>
-                Bacteria divide: 1 becomes 2, 2 become 4, 4 become 8. This is "Exponential Growth". If we plot this on normal paper, the line shoots off the page instantly. Biologists use "Log Graphs" to turn this curve into a straight line, making it easier to predict outbreaks.
+                <span class="context-title">Exponential Growth</span>
+                Bacteria double every generation ($1 \to 2 \to 4$). We use logs (base 2) to figure out how many doublings occurred.
             </div>
             <div class="calc-section">
-                <div class="formula">Generations = log₂(Final / Start)</div>
+                <div class="formula-container">
+                    <div class="formula">n = <span>log</span><sub>2</sub>( N<sub>final</sub> / N<sub>start</sub> )</div>
+                </div>
                 <div class="input-row">
                     <div class="input-group">
                         <label>Start Count</label>
@@ -277,11 +307,13 @@
                 <span class="badge" style="background:var(--c-bafs)">BAFS / Econ</span>
             </div>
             <div class="context-box">
-                <span class="context-title">Solving for Time</span>
-                If you invest money, it grows exponentially (snowball effect). If you want to know *how much* money you'll have, you use exponents. But if you want to know *how long* (time) it takes to become a millionaire, you must use **Logarithms** to reverse the exponent.
+                <span class="context-title">Time Value of Money</span>
+                To find <em>how long</em> it takes to reach a financial goal, we must use logarithms to solve for time ($t$) in the exponent.
             </div>
             <div class="calc-section">
-                <div class="formula">Time = log(Target/Principal) ÷ log(1+r)</div>
+                <div class="formula-container">
+                    <div class="formula">t = <span>log</span>(A/P) / <span>log</span>(1+r)</div>
+                </div>
                 <div class="input-row">
                     <div class="input-group">
                         <label>Principal ($)</label>
@@ -294,7 +326,7 @@
                 </div>
                 <div class="input-row">
                      <div class="input-group">
-                        <label>Interest Rate (%)</label>
+                        <label>Annual Rate (%)</label>
                         <input type="number" id="bafs-r" value="5">
                     </div>
                 </div>
@@ -310,18 +342,20 @@
                 <span class="badge" style="background:var(--c-ict)">ICT</span>
             </div>
             <div class="context-box">
-                <span class="context-title">Divide and Conquer</span>
-                Imagine a phone book with 1,000,000 names. You don't read every name. You open the middle, see if the name is left or right, and repeat. You cut the problem in half every time. Logarithms (base 2) tell programmers exactly how many "cuts" are needed.
+                <span class="context-title">Algorithm Efficiency</span>
+                In a sorted list, you can find any item by repeatedly splitting the list in half. Logarithms tell us the maximum "splits" needed.
             </div>
             <div class="calc-section">
-                <div class="formula">Max Steps = log₂(Items)</div>
+                <div class="formula-container">
+                    <div class="formula">Steps = <span>log</span><sub>2</sub>(N)</div>
+                </div>
                 <div class="input-row">
                     <div class="input-group">
                         <label>Database Size (Rows)</label>
                         <input type="number" id="ict-n" value="1000000">
                     </div>
                 </div>
-                <button onclick="calcIct()">Calculate Steps</button>
+                <button onclick="calcIct()">Calculate Max Steps</button>
                 <div id="res-ict" class="result"></div>
             </div>
         </div>
@@ -333,11 +367,13 @@
                 <span class="badge" style="background:var(--c-music)">Music / Physics</span>
             </div>
             <div class="context-box">
-                <span class="context-title">Logarithmic Ears</span>
-                Our ears perceive pitch logarithmically. The note "A3" is 220Hz. "A4" is 440Hz. "A5" is 880Hz. Every time the frequency **doubles**, we hear the "same" note, just higher. This equal spacing of octaves is a base-2 logarithmic scale.
+                <span class="context-title">Octaves are Logarithmic</span>
+                Every time the frequency doubles, the pitch goes up one octave. The distance between notes is based on the log (base 2) ratio.
             </div>
             <div class="calc-section">
-                <div class="formula">Octaves = log₂(Freq2 / Freq1)</div>
+                <div class="formula-container">
+                    <div class="formula">Octaves = <span>log</span><sub>2</sub>( f<sub>2</sub> / f<sub>1</sub> )</div>
+                </div>
                 <div class="input-row">
                     <div class="input-group">
                         <label>Low Note (Hz)</label>
@@ -348,7 +384,7 @@
                         <input type="number" id="music-f2" value="880">
                     </div>
                 </div>
-                <button onclick="calcMusic()">Calculate Octaves</button>
+                <button onclick="calcMusic()">Calculate Interval</button>
                 <div id="res-music" class="result"></div>
             </div>
         </div>
@@ -360,11 +396,13 @@
                 <span class="badge" style="background:var(--c-astro)">Astronomy</span>
             </div>
             <div class="context-box">
-                <span class="context-title">The Backward Scale</span>
-                Ancient astronomers ranked stars: 1st class (brightest) to 6th class (dimmest). Modern science kept this but made it math. It's an **inverse log scale**: Lower numbers are brighter. A difference of 5 magnitudes = exactly 100x brightness difference.
+                <span class="context-title">Inverse Log Scale</span>
+                A <em>lower</em> magnitude number means a <em>brighter</em> star. A difference of 5 magnitudes is exactly a 100x difference in brightness.
             </div>
             <div class="calc-section">
-                <div class="formula">Mag Diff = -2.5 · log₁₀(Bright1 / Bright2)</div>
+                <div class="formula-container">
+                    <div class="formula">Δm = -2.5 <span>log</span><sub>10</sub>( B<sub>1</sub> / B<sub>2</sub> )</div>
+                </div>
                 <div class="input-row">
                     <div class="input-group">
                         <label>Brightness Ratio</label>
@@ -376,60 +414,105 @@
             </div>
         </div>
 
+        <div class="card arch">
+            <div class="card-header">
+                <span class="icon">🦴</span>
+                <h2>Carbon Dating</h2>
+                <span class="badge" style="background:var(--c-arch)">History / Chem</span>
+            </div>
+            <div class="context-box">
+                <span class="context-title">Exponential Decay</span>
+                Carbon-14 disappears over time. By measuring how much is left (%), we use natural logs ($ln$) to calculate the age of the artifact.
+            </div>
+            <div class="calc-section">
+                <div class="formula-container">
+                    <div class="formula">t = -8267 · <span>ln</span>( % / 100 )</div>
+                </div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Remaining C-14 (%)</label>
+                        <input type="number" id="arch-p" value="50" placeholder="0-100">
+                    </div>
+                </div>
+                <button onclick="calcArch()">Calculate Age</button>
+                <div id="res-arch" class="result"></div>
+            </div>
+        </div>
+
     </div>
 
     <script>
+        function show(id, text) {
+            const el = document.getElementById(id);
+            el.innerText = text;
+            el.classList.add('show');
+        }
+
         // Physics
         function calcPhy() {
             const I = parseFloat(document.getElementById('phy-i').value);
+            if(I <= 0) return show('res-phy', "Enter positive intensity");
             const res = 10 * Math.log10(I/1e-12);
-            document.getElementById('res-phy').innerText = res.toFixed(2) + " dB";
+            show('res-phy', res.toFixed(2) + " dB");
         }
         // Chemistry
         function calcChem() {
             const h = parseFloat(document.getElementById('chem-h').value);
+            if(h <= 0) return show('res-chem', "Enter positive concentration");
             const res = -Math.log10(h);
-            document.getElementById('res-chem').innerText = "pH " + res.toFixed(2);
+            show('res-chem', "pH " + res.toFixed(2));
         }
         // Geo
         function calcGeo() {
             const m = parseFloat(document.getElementById('geo-m').value);
             const e = Math.pow(10, 4.8 + 1.5*m);
-            document.getElementById('res-geo').innerText = e.toExponential(2) + " Joules";
+            show('res-geo', e.toExponential(2) + " Joules");
         }
         // Bio
         function calcBio() {
             const s = parseFloat(document.getElementById('bio-s').value);
             const e = parseFloat(document.getElementById('bio-e').value);
+            if(s <= 0 || e <= 0) return show('res-bio', "Check inputs");
             const res = Math.log2(e/s);
-            document.getElementById('res-bio').innerText = res.toFixed(1) + " Gens";
+            show('res-bio', res.toFixed(1) + " Generations");
         }
         // BAFS
         function calcBafs() {
             const p = parseFloat(document.getElementById('bafs-p').value);
             const a = parseFloat(document.getElementById('bafs-a').value);
             const r = parseFloat(document.getElementById('bafs-r').value)/100;
+            if(p <= 0 || a <= p) return show('res-bafs', "Target must > Principal");
             const res = Math.log(a/p) / Math.log(1+r);
-            document.getElementById('res-bafs').innerText = res.toFixed(1) + " Years";
+            show('res-bafs', res.toFixed(1) + " Years");
         }
         // ICT
         function calcIct() {
             const n = parseFloat(document.getElementById('ict-n').value);
+            if(n <= 0) return show('res-ict', "Enter positive size");
             const res = Math.log2(n);
-            document.getElementById('res-ict').innerText = Math.ceil(res) + " Steps (Max)";
+            show('res-ict', Math.ceil(res) + " Steps (Max)");
         }
         // Music
         function calcMusic() {
             const f1 = parseFloat(document.getElementById('music-f1').value);
             const f2 = parseFloat(document.getElementById('music-f2').value);
+            if(f1 <= 0 || f2 <= 0) return show('res-music', "Enter positive freq");
             const res = Math.log2(f2/f1);
-            document.getElementById('res-music').innerText = res.toFixed(2) + " Octaves";
+            show('res-music', res.toFixed(2) + " Octaves");
         }
         // Astro
         function calcAstro() {
             const r = parseFloat(document.getElementById('astro-r').value);
+            if(r <= 0) return show('res-astro', "Enter positive ratio");
             const res = -2.5 * Math.log10(r);
-            document.getElementById('res-astro').innerText = Math.abs(res).toFixed(2) + " Magnitude";
+            show('res-astro', Math.abs(res).toFixed(2) + " Magnitude Diff");
+        }
+        // Archaeology
+        function calcArch() {
+            const p = parseFloat(document.getElementById('arch-p').value);
+            if (p <= 0 || p >= 100) return show('res-arch', "Enter valid % (<100)");
+            const age = -8267 * Math.log(p/100);
+            show('res-arch', Math.round(age) + " Years Old");
         }
     </script>
 </body>
